@@ -1,9 +1,11 @@
-{% extends 'main.html' %}
+{% extends 'navbar.html' %}
+
 {% block content %}
+{% include "status.html" %}
 <br>
 <div class="row">
     <div class="col-md-5">
-        <h5> Details Customer</h5>
+        <h5 align='center'> Details Customer</h5>
         <hr>
         <div class="card card-body">
             <a class="btn btn-primary btn-sm btn-block" href="#">Create Customer </a>
@@ -17,7 +19,7 @@
         </div>
     </div>
     <div class="col-md-7">
-        <h5> Last Five Records </h5>
+        <h5 align='center'> Last Five Records </h5>
         <hr>
         <div class="card card-body">
             <a class="btn btn-primary btn-sm btn-block" href="#">Create Customer </a>
