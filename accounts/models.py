@@ -11,7 +11,6 @@ class Customer(models.Model):
     def __str__(self):
         return self.name
 
-
 class Product(models.Model):
     CATEGORY = (
         ("Indoor","Indoor"),
@@ -26,15 +25,14 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
-
 class Order(models.Model):
     STATUS = (
         ('pending','pending'),
         ('Out of Deilvery','Out of Deilvery'),
         ('Delivered','Delivered'),
     )
-    # customer = models.
-    # products = models.
+    customer = models.ForeignKey(Customer, null=True , on_delete=models.SET_NULL)
+    products = models.ForeignKey(Product, null=True , on_delete=models.SET_NULL)
     date_created = models.DateField(auto_now_add=True, null=True)
     status = models.CharField(max_length=200,choices=STATUS)
 
