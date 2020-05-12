@@ -4,7 +4,10 @@ from .models import *
 # Create your views here.
 
 def home(request):
-    return render(request, 'index.html')
+    orders_data = Order.objects.all()
+    customer_data = Customer.objects.all()
+    context = {'orders_show':orders_data,'customer_show':customer_data}
+    return render(request, 'index.html',context)
 
 def products(request):
     products_data = Product.objects.all()
