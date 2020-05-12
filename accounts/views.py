@@ -9,4 +9,4 @@ def products(request):
     return render(request, 'products.html')
 
 def customer(request):
-    return HttpResponse("this is my about page and my name is mayur kumar bhure")
+    return render(request, 'customers.html')
