@@ -22,5 +22,6 @@ def products(request):
 def customer(request, pk_text):
     customer = Customer.objects.get(id=pk_text)
     orders = customer.order_set.all()
-    context = {'customer':customer,'orders':orders}
+    total_orders = orders.count()
+    context = {'customer':customer,'orders':orders,'order_counts':total_orders}
     return render(request, 'customers.html',context)
