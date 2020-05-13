@@ -55,6 +55,16 @@
                     <th> Uqdate </th>
                     <th> Remove </th>
                 </tr>
+                {% for orders_show in orders %}
+                <tr>
+                    <td> {{ orders_show.products }} </td>
+                    <td> {{ orders_show.products.category }} </td>
+                    <td> {{ orders_show.date_created }} </td>
+                    <td> {{ orders_show.status }} </td>
+                    <td><a href=""> Update </a></td>
+                    <td><a href=""> Remove </a></td>
+                </tr>
+                {% endfor %}
             </table>
         </div>
     </div>
