@@ -1,0 +1,12 @@
+{% extends 'navbar.html' %}
+{% load static %}
+
+{% block content %}
+
+<form action='' method="POST">
+    {% csrf_token %}
+    {{ from_data }}
+    <input type="submit" name="Submit">
+</form>
+
+{% endblock %}
