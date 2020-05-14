@@ -29,7 +29,6 @@ def customer(request, pk_text):
 
 def create_order(request):
     from_data = OrderForm()
-
     if request.method == 'POST':
         # print('printing POST:', request.POST)
         form = OrderForm(request.POST)
@@ -37,5 +36,11 @@ def create_order(request):
             form.save()
             return redirect('/')
 
-    context = {'from_data':from_data}
+    context = {'from':from_data}
     return render(request,'order_form.html',context)
+
+def update_order(request, pk1):
+    u_order = Order.objects.get(id=pk1)
+    form_update = OrderForm(instance=u_order)
+    context = {'from':form_update}
+    return render(request, 'order_form.html' ,context)
