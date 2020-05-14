@@ -42,5 +42,11 @@ def create_order(request):
 def update_order(request, pk1):
     u_order = Order.objects.get(id=pk1)
     form_update = OrderForm(instance=u_order)
+    if request.method == 'POST':
+        # print('printing POST:', request.POST)
+        form = OrderForm(request.POST, instance=u_order)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
     context = {'from':form_update}
     return render(request, 'order_form.html' ,context)
