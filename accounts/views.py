@@ -41,6 +41,7 @@ def create_order(request):
 
 def update_order(request, pk1):
     u_order = Order.objects.get(id=pk1)
+    print("-------------------------------------------------------------",u_order)
     form_update = OrderForm(instance=u_order)
     if request.method == 'POST':
         # print('printing POST:', request.POST)
@@ -50,3 +51,10 @@ def update_order(request, pk1):
             return redirect('/')
     context = {'from':form_update}
     return render(request, 'order_form.html' ,context)
+
+
+def delete(request, pk2):
+    d_order = Order.objects.get(id=pk2)
+
+    context = {'item':d_order}
+    return render(request, 'delete.html',context)

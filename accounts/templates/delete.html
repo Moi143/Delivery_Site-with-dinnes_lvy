@@ -1,0 +1,10 @@
+{% extends 'navbar.html' %}
+{% load static %}
+{% block content %}
+
+<p> Do you sure you want to delete "{{ item }}" ?</p>
+<form method="POST">
+    <a class="" href="{% url 'home' %}"> Cancel </a>
+    <input type="submit" name="Confirm">
+</form>
+{% endblock %}

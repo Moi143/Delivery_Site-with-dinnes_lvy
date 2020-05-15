@@ -7,4 +7,5 @@ urlpatterns = [
     path('customer_profile/<str:pk_text>/',views.customer,name='customer'),
     path('create_order',views.create_order,name="Create_Order"),
     path('Update_order/<str:pk1>/',views.update_order,name='update'),
+    path('delete_order/<str:pk2>',views.delete,name='delete'),
 ]
