@@ -55,6 +55,8 @@ def update_order(request, pk1):
 
 def delete(request, pk2):
     d_order = Order.objects.get(id=pk2)
-
+    if request.method == 'POST':
+        d_order.delete()
+        return redirect("/")
     context = {'item':d_order}
     return render(request, 'delete.html',context)
