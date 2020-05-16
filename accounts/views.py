@@ -27,20 +27,20 @@ def customer(request, pk_text):
     return render(request, 'customers.html',context)
 
 def create_order(request, pk):
+    OrderFormSet = inlineformset_factory(Customer, Order, fields=("products", 'status'),extra=1)
     customer = Customer.objects.get(id=pk)
-    from_data = OrderForm(initial={'customer':customer}) # with data print
+    fromset = OrderFormSet(instance = customer)
     if request.method == 'POST':
-        form = OrderForm(request.POST)
-        if form.is_valid():
-            form.save()
+        fromset = OrderFormSet(request.POST,instance = customer)
+        if fromset.is_valid():
+            fromset.save()
             return redirect('/')
-    context = {'from':from_data}
+    context = {'fromset':fromset}
     return render(request,'order_form.html',context)
 
 def update_order(request, pk1):
     u_order = Order.objects.get(id=pk1)
     form_update = OrderForm(instance=u_order)
-    print("------------------------ there is U_order",u_order,'----------------------------there is the',form_update)
     if request.method == 'POST':
         # print('printing POST:', request.POST)
         form = OrderForm(request.POST, instance=u_order)
