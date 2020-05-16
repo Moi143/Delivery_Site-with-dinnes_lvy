@@ -26,7 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'accounts',
-    'django_filters', #pip install django-filter
+    'django_filters'
 ]
 
 MIDDLEWARE = [

@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.forms import inlineformset_factory #this is for multipled fromset
 from .models import *
 from .forms import OrderForm
+from .filters import OrderFilter
 # Create your views here.
 
 def home(request):
@@ -23,7 +24,8 @@ def customer(request, pk_text):
     customer = Customer.objects.get(id=pk_text)
     orders = customer.order_set.all()
     total_orders = orders.count()
-    context = {'customer':customer,'orders':orders,'order_counts':total_orders}
+    myfilter = OrderFilter()
+    context = {'customer':customer,'orders':orders,'order_counts':total_orders,'myfilter':myfilter}
     return render(request, 'customers.html',context)
 
 def create_order(request, pk):
