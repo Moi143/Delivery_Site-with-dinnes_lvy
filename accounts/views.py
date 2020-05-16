@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.forms import inlineformset_factory #this is for multipled fromset
 from .models import *
 from .forms import OrderForm
 # Create your views here.
@@ -27,7 +28,7 @@ def customer(request, pk_text):
 
 def create_order(request, pk):
     customer = Customer.objects.get(id=pk)
-    from_data = OrderForm()
+    from_data = OrderForm(initial={'customer':customer}) # with data print
     if request.method == 'POST':
         form = OrderForm(request.POST)
         if form.is_valid():
@@ -39,6 +40,7 @@ def create_order(request, pk):
 def update_order(request, pk1):
     u_order = Order.objects.get(id=pk1)
     form_update = OrderForm(instance=u_order)
+    print("------------------------ there is U_order",u_order,'----------------------------there is the',form_update)
     if request.method == 'POST':
         # print('printing POST:', request.POST)
         form = OrderForm(request.POST, instance=u_order)
