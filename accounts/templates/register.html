@@ -1,8 +1,5 @@
 <form method="POST" action=''>
     {% csrf_token %}
     {{ form.as_p }}
-
-    <div class="form-button">
-        <button id="submit" type="submit" class="ibtn">Register</button>
-    </div>
+    <input id="submit" type="submit" name='Create_user'/>
 </form>
