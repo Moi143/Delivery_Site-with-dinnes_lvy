@@ -1,10 +1,23 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.forms import inlineformset_factory #this is for multipled fromset
+from django.contrib.auth.forms import UserCreationForm
 from .models import *
 from .forms import OrderForm
 from .filters import OrderFilter
+
 # Create your views here.
+
+def registerpage(request):
+    form = UserCreationForm()
+
+    context = {'form':form}
+    return render(request,'register.html',context)
+
+def loginpage(request):
+    context = {}
+    
+    return render(request,'login14.html',context)
 
 def home(request):
     orders_data = Order.objects.all()
