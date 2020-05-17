@@ -48,7 +48,7 @@
             <table class="table table-sm">
                 <tr>
                     <th> Products </th>
-                    <th> Category </th>
+                    <th> Notes </th>
                     <th> Date Ordered </th>
                     <th> Status </th>
                     <th> Uqdate </th>
@@ -57,7 +57,7 @@
                 {% for orders_show in orders %}
                 <tr>
                     <td> {{ orders_show.products }} </td>
-                    <td> {{ orders_show.products.category }} </td>
+                    <td> {{ orders_show.notes }} </td>
                     <td> {{ orders_show.date_created }} </td>
                     <td> {{ orders_show.status }} </td>
                     <td><a class='btn btn-sm btn-info' href="{% url 'update' orders_show.id %}">Update</a></td>
