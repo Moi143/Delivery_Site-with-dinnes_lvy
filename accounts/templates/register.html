@@ -1,5 +1,9 @@
 <form method="POST" action=''>
     {% csrf_token %}
-    {{ form.as_p }}
+    {% for field in form %}
+        <hr>
+        {{ field.label }}
+        {{ field }}
+    {% endfor %}
     <input id="submit" type="submit" name='Create_user'/>
 </form>

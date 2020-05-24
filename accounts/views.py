@@ -3,19 +3,19 @@ from django.http import HttpResponse
 from django.forms import inlineformset_factory #this is for multipled fromset
 from django.contrib.auth.forms import UserCreationForm
 from .models import *
-from .forms import OrderForm
+from .forms import OrderForm, CreateUserForm
 from .filters import OrderFilter
 
 # Create your views here.
 
 def registerpage(request):
-    form = UserCreationForm()
+    form = CreateUserForm()
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CreateUserForm(request.POST)
         if form.is_valid():
             form.save()
     context = {'form':form}
-    return render(request,'register.html',context)
+    return render(request,'register14.html',context)
 
 def loginpage(request):
     context = {}
