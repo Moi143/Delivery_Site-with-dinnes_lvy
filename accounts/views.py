@@ -6,6 +6,7 @@ from .models import *
 from .forms import OrderForm, CreateUserForm
 from .filters import OrderFilter
 from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
 def registerpage(request):
@@ -22,6 +23,19 @@ def registerpage(request):
     return render(request, 'register14.html', context)
 
 def loginpage(request):
+    if request.method == 'POST':
+        username1 = request.POST.get('username')
+        password1 = request.POST.get('password')
+        user = authenticate(request, username=username1 , password=password1)
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+        else:
+            messages.info(request,'Username or Password is not Valid')
+            return redirect('login')
+
+
+
     context = {}
     return render(request,'login14.html',context)
 
