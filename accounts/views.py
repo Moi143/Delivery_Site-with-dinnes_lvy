@@ -5,21 +5,24 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import *
 from .forms import OrderForm, CreateUserForm
 from .filters import OrderFilter
+from django.contrib import messages
 
 # Create your views here.
-
 def registerpage(request):
     form = CreateUserForm()
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
         if form.is_valid():
             form.save()
+            first_name = form.cleaned_data.get('first_name')
+            last_name = form.cleaned_data.get('last_name')
+            messages.success(request, 'Account is created for ' + first_name + " " + last_name )
+            return redirect('login')
     context = {'form':form}
-    return render(request,'register14.html',context)
+    return render(request, 'register14.html', context)
 
 def loginpage(request):
     context = {}
-    
     return render(request,'login14.html',context)
 
 def home(request):
@@ -61,7 +64,6 @@ def update_order(request, pk1):
     u_order = Order.objects.get(id=pk1)
     form_update = OrderForm(instance=u_order)
     if request.method == 'POST':
-        # print('printing POST:', request.POST)
         form = OrderForm(request.POST, instance=u_order)
         if form.is_valid():
             form.save()
