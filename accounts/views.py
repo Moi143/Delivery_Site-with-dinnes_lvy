@@ -32,12 +32,12 @@ def loginpage(request):
             return redirect('home')
         else:
             messages.info(request,'Username or Password is not Valid')
-            return redirect('login')
-
-
-
     context = {}
     return render(request,'login14.html',context)
+
+def logoutuser(request):
+    logout(request)
+    return redirect('login')
 
 def home(request):
     orders_data = Order.objects.all()
