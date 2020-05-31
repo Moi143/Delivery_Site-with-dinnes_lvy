@@ -21,10 +21,12 @@ def registerpage(request):
             user = form.save()
             first_name = form.cleaned_data.get('first_name')
             last_name = form.cleaned_data.get('last_name')
-
             group = Group.objects.get(name='customer')
             user.groups.add(group)
-            
+            Customer.objects.create(
+                user=user,
+                name=user.username,
+				)
             messages.success(request, 'Account is created for ' + first_name + " " + last_name )
             return redirect('login')
     context = {'form':form}
@@ -48,8 +50,14 @@ def logoutuser(request):
     logout(request)
     return redirect('login')
 
+@login_required(login_url='login') #decorators
+@allowed_users(allowed_roles=['customer'])
 def userpage(request):
-    context = {}
+    orders = request.user.customer.order_set.all()
+    total_orders = orders.count()
+    total_delivered = orders.filter(status='Delivered').count()
+    total_pending = orders.filter(status='pending').count()
+    context = {'orders':orders,'order_delivered_show':total_delivered,'total_pending_show':total_pending,'total_orders_show':total_orders}
     return render(request,'user.html',context)
 
 @login_required(login_url='login') #decorators
