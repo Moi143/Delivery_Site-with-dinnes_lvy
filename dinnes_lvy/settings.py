@@ -25,7 +25,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'accounts',
+    'accounts.apps.AccountsConfig',
     'django_filters'
 ]
 
@@ -115,3 +115,12 @@ STATICFILES_DIRS= [
 
 MEDIA_URL = 'accounts/static/images/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'accounts/static/user_images')
+
+#SMTP Configration
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com" #https://myaccount.google.com/lesssecureapps
+EMAIL_PORT = 587 #gmail smtp configuration (Google Searhing)
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = "mayurbhure6@gmail.com"
+EMAIL_HOST_PASSWORD = "Mayur143"

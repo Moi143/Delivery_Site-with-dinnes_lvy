@@ -1,0 +1,46 @@
+{% extends 'links.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    .img {
+        border:solid #ddd;
+        border-radius: 100%;
+        padding: 5px;
+        max-width: 300px;
+        width: 250px;;
+        height: 250px;
+        max-height: 300px;
+    }
+      
+      img:hover {
+        box-shadow: 0 0 20px 10px rgba(0, 140, 186, 0.5);
+    }
+</style>
+<hr>
+<div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card card-body">
+                <a class="btn btn-warning" href="{% url 'home' %}"> Back to Profile </a>
+                <hr>
+                <h3 style="text-align: center">Accounts settings</h3>
+                <hr>
+                <a align="center" href="">
+                    <img src="{{ request.user.customer.profile_pic.url }}" class="img">
+                </a>
+                <hr>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="card card-body">
+                <form method="POST" action='' enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input class="btn btn-primary" type="submit" name="update Information"/>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

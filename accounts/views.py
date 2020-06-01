@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.forms import inlineformset_factory #this is for multipled fromset
 from django.contrib.auth.forms import UserCreationForm
 from .models import *
-from .forms import OrderForm, CreateUserForm
+from .forms import OrderForm, CreateUserForm, CustomerForm
 from .filters import OrderFilter
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -21,12 +21,6 @@ def registerpage(request):
             user = form.save()
             first_name = form.cleaned_data.get('first_name')
             last_name = form.cleaned_data.get('last_name')
-            group = Group.objects.get(name='customer')
-            user.groups.add(group)
-            Customer.objects.create(
-                user=user,
-                name=user.username,
-				)
             messages.success(request, 'Account is created for ' + first_name + " " + last_name )
             return redirect('login')
     context = {'form':form}
@@ -59,6 +53,19 @@ def userpage(request):
     total_pending = orders.filter(status='pending').count()
     context = {'orders':orders,'order_delivered_show':total_delivered,'total_pending_show':total_pending,'total_orders_show':total_orders}
     return render(request,'user.html',context)
+
+@login_required(login_url='login') #decorators
+@allowed_users(allowed_roles=['customer'])
+def account_setting(request):
+    customer_form = request.user.customer
+    form = CustomerForm(instance=customer_form)
+    if request.method == 'POST':
+        form = CustomerForm(request.POST, request.FILES, instance=customer_form)
+        if form.is_valid():
+            form.save()
+    context = {'form':form}
+    return render(request,"account.html",context)
+
 
 @login_required(login_url='login') #decorators
 @admin_only
@@ -125,3 +132,5 @@ def delete(request, pk2):
         return redirect("/")
     context = {'item':d_order}
     return render(request, 'delete.html',context)
+
+

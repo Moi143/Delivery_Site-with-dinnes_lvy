@@ -37,7 +37,7 @@
                                 <p style='color:red' id="messages">{{ message }} </p>
                             {% endfor %}
                             <div class="form-button">
-                                <button id="submit" type="submit" class="ibtn">Login</button> <a href="forget14.html">Forget password?</a>
+                                <button id="submit" type="submit" class="ibtn">Login</button> <a href="{% url 'reset_password' %}">Forget password?</a>
                             </div>              
                         </form>
                         <div class="other-links">
